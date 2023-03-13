@@ -52,6 +52,3 @@ def analyze_log(path_to_file):
             days_never_went_joao,
         ],
     )
-
-
-analyze_log("data/orders_1.csv")
