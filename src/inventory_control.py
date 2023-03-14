@@ -27,14 +27,13 @@ class InventoryControl:
         }
 
     def add_new_order(self, customer, order, day):
+        available_dishes = self.get_available_dishes()
+
+        if order not in available_dishes:
+            return False
+
         for ingredient in self.INGREDIENTS[order]:
-            if (
-                self.shopping_list[ingredient]
-                < self.MINIMUM_INVENTORY[ingredient]
-            ):
-                self.shopping_list[ingredient] += 1
-            else:
-                return False
+            self.shopping_list[ingredient] += 1
 
     def get_quantities_to_buy(self):
         return self.shopping_list
