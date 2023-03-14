@@ -26,8 +26,6 @@ class InventoryControl:
             "frango": 0,
         }
 
-        self.inventory = self.MINIMUM_INVENTORY.copy()
-
     def add_new_order(self, customer, order, day):
         for ingredient in self.INGREDIENTS[order]:
             if (
@@ -35,7 +33,6 @@ class InventoryControl:
                 < self.MINIMUM_INVENTORY[ingredient]
             ):
                 self.shopping_list[ingredient] += 1
-                self.inventory[ingredient] -= 1
             else:
                 return False
 
@@ -45,8 +42,9 @@ class InventoryControl:
     def get_available_dishes(self):
         missing_ingredients = {
             ingredient
-            for ingredient in self.inventory
-            if self.inventory[ingredient] < 1
+            for ingredient in self.shopping_list
+            if self.shopping_list[ingredient]
+            == self.MINIMUM_INVENTORY[ingredient]
         }
 
         available_dishes = {
