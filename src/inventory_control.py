@@ -41,9 +41,8 @@ class InventoryControl:
     def get_available_dishes(self):
         missing_ingredients = {
             ingredient
-            for ingredient in self.shopping_list
-            if self.shopping_list[ingredient]
-            == self.MINIMUM_INVENTORY[ingredient]
+            for ingredient, qty in self.shopping_list.items()
+            if qty == self.MINIMUM_INVENTORY[ingredient]
         }
 
         available_dishes = {
